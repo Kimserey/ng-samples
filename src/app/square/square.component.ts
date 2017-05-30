@@ -6,7 +6,7 @@ import { SquareService } from './square.service';
   selector: 'app-square',
   template: `
     <div class="square" *ngIf="show"></div>
-    <div>Surface: {{surface}}</div>
+    <div appHighlight>Surface: {{surface}}</div>
   `,
   styles: [
     `.square {
