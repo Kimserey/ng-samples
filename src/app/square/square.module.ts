@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 
+import { AppConfig } from './square.model';
 import { SquareComponent } from './square.component';
 import { SquareService } from './square.service';
 
@@ -17,7 +18,8 @@ import { SquareService } from './square.service';
     SquareComponent
   ],
   providers: [
-    SquareService
+    SquareService,
+    { provide: AppConfig, useClass: AppConfig  } // Same as AppConfig
   ]
 })
 export class SquareModule { }
