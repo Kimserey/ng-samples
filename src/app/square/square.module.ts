@@ -4,8 +4,10 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 
 import { AppConfig } from './square.model';
+import { DoubleSquareService } from './double-square.service';
 import { SquareComponent } from './square.component';
-import { SquareService } from './square.service';
+import { SquareService, squareServiceFactory } from './square.service';
+import { Logger } from '../logger.service';
 
 @NgModule({
   imports: [
@@ -18,7 +20,10 @@ import { SquareService } from './square.service';
     SquareComponent
   ],
   providers: [
-    SquareService,
+    // SquareService,
+    // DoubleSquareService,
+    // { provide: SquareService, useClass: DoubleSquareService },
+    { provide: SquareService, useFactory: squareServiceFactory, deps: [Logger] },
     { provide: AppConfig, useClass: AppConfig  } // Same as AppConfig
   ]
 })

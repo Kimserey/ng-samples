@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { SquareService } from './square.service';
 import { AppConfig } from './square.model';
+import { SquareService } from './square.service';
 
 @Component({
   selector: 'app-square',
