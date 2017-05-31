@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 
-import { APP_CONFIG } from './appconfig.model';
 import { AppComponent } from './app.component';
 import { Logger } from './logger.service';
 import { SquareModule } from './square/square.module';
-
+import { TEST } from './test.token';
 
 @NgModule({
   imports: [
@@ -17,7 +16,7 @@ import { SquareModule } from './square/square.module';
   ],
   providers: [
     Logger,
-    { provide: APP_CONFIG, useValue: { Test: 'Hello world' } }
+    { provide: TEST, useValue: { Test: 'Hello world' } }
   ],
   bootstrap: [
     AppComponent

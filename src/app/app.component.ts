@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
+import { TEST } from './test.token';
+import { Test } from './test.model';
 
-import { APP_CONFIG, AppConfig } from './appconfig.model';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import { APP_CONFIG, AppConfig } from './appconfig.model';
 export class AppComponent {
   title = 'app works!';
 
-  constructor(@Inject(APP_CONFIG) config: AppConfig) {
+  constructor(@Inject(TEST) config: Test) {
     this.title = this.title + ' ' + config.Test;
   }
 }
