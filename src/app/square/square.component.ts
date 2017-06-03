@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 import { AppConfig } from './square.model';
 import { SquareService } from './square.service';
@@ -6,7 +6,7 @@ import { SquareService } from './square.service';
 @Component({
   selector: 'app-square',
   template: `
-    <div class="square" *ngIf="show"></div>
+    <div class="square" *ngIf="show" (click)="onPressed()"></div>
     <div appHighlight>Surface: {{surface}}</div>
     <div>{{config.api}}</div>
   `,
@@ -19,11 +19,42 @@ import { SquareService } from './square.service';
     `
   ]
 })
-export class SquareComponent {
+export class SquareComponent implements OnChanges, OnInit {
   @Input() show: boolean;
+  @Input() set side(s: number) {
+      console.log('side set ' + s);
+      this._side = s;
+  }
+  get side() {
+      return this._side;
+  }
+  @Output() something = new EventEmitter<number>();
+
+  _side: number;
   surface: number;
 
-  constructor(service: SquareService, private config: AppConfig) {
-    this.surface = service.computeSurface(100);
+  constructor(private service: SquareService, private config: AppConfig) {
+    console.log('constructor ' + this.side);
+  }
+
+  ngOnInit() {
+    this.computeSurface();
+    console.log('ngOnInit ' + this.side);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.computeSurface();
+    console.log(`
+      side previous value: ${changes['side'].previousValue},
+      side current value: ${changes['side'].currentValue}
+    `);
+  }
+
+  onPressed() {
+    this.something.emit(this.surface);
+  }
+
+  private computeSurface() {
+    this.surface = this.service.computeSurface(this.side);
   }
 }
