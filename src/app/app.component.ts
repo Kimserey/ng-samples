@@ -9,7 +9,8 @@ import { Test } from './test.model';
     <h1>
       {{title}}
     </h1>
-    <app-square [show]="true"></app-square>
+    <app-square [show]="true" #square></app-square>
+    <strong>{{square.show}}</strong>
     <app-square [show]="true"></app-square>
     <app-square [show]="true"></app-square>
     <app-square [show]="true"></app-square>

@@ -9,7 +9,7 @@ export class SquareService {
   computeSurface = (side: number) => side * side;
 }
 
-export const squareServiceFactory = (logger: Logger) => {
+export function squareServiceFactory (logger: Logger){
   logger.log('factory called');
   return new SquareService(logger);
 };
