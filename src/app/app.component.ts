@@ -16,6 +16,8 @@ import { Test } from './test.model';
     <strong>{{surface}}</strong>
     <br />
     <button (click)="increase()">+</button>
+
+    <app-simple-form></app-simple-form>
   `,
   styles: []
 })

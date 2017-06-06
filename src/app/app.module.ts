@@ -3,13 +3,15 @@ import { InjectionToken, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { Logger } from './logger.service';
+import { ReactiveFormPlaygroundModule } from './reactive-form-playground/reactive-form-playground.module';
 import { SquareModule } from './square/square.module';
 import { TEST } from './test.token';
 
 @NgModule({
   imports: [
     BrowserModule,
-    SquareModule
+    SquareModule,
+    ReactiveFormPlaygroundModule
   ],
   declarations: [
     AppComponent
