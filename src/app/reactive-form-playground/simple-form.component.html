@@ -10,7 +10,20 @@
   <div formArrayName="ingredients">
     <div *ngFor="let ingredient of ingredients.controls; let i=index" [formGroupName]="i">
       <label>#{{ i + 1 }} Ingredient</label>
-      <input type="text" formControlName="ingredientName" />
+      <div formGroupName="ingredientDescription">
+        <div>
+          <label>Ingredient name</label>
+          <input type="text" formControlName="name" />
+        </div>
+        <div>
+          <label>Quantity</label>
+          <input type="text" formControlName="quantity" />
+        </div>
+      </div>
+      <div>
+        <label>Description</label>
+        <input type="text" formControlName="description" />
+      </div>
       <button (click)="removeIngredientAtIndex(i)">-</button>
     </div>
   </div>

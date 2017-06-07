@@ -14,7 +14,7 @@ export class SimpleFormComponent {
 
   constructor(private fb: FormBuilder) {
     const ingredients = [ 'carrot', 'beans' ];
-    const ingredientFromGroups = ingredients.map(i => fb.group({ ingredientName: i }));
+    const ingredientFromGroups = ingredients.map(i => fb.group(this.initializeIngredientForm()));
 
     this.recipeForm = fb.group({
       profile: fb.group({
@@ -25,10 +25,18 @@ export class SimpleFormComponent {
     });
   }
 
+  initializeIngredientForm() {
+    return {
+        ingredientDescription: this.fb.group({
+          name: '',
+          quantity: ''
+        }),
+        description: ''
+    }
+  }
+
   addIngredient() {
-    this.ingredients.push(this.fb.group({
-      ingredientName: ''
-    }));
+    this.ingredients.push(this.fb.group(this.initializeIngredientForm()));
   }
 
   removeIngredientAtIndex(index) {
