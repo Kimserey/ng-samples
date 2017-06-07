@@ -1,1 +1,21 @@
-<div>Hello world</div>
+<form [formGroup]="recipeForm">
+  <div formGroupName="profile">
+    <label>Recipe name</label>
+    <input type="text" formControlName="name" />
+    <label>Estimation</label>
+    <input type="text" formControlName="timeEstimation" />
+  </div>
+
+  <button (click)="addIngredient()">Add another ingredient</button>
+  <div formArrayName="ingredients">
+    <div *ngFor="let ingredient of ingredients.controls; let i=index" [formGroupName]="i">
+      <label>#{{ i + 1 }} Ingredient</label>
+      <input type="text" formControlName="ingredientName" />
+      <button (click)="removeIngredientAtIndex(i)">-</button>
+    </div>
+  </div>
+</form>
+
+<pre>
+  {{ recipeForm.value | json }}
+</pre>
