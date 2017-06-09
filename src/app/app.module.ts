@@ -6,12 +6,14 @@ import { Logger } from './logger.service';
 import { ReactiveFormPlaygroundModule } from './reactive-form-playground/reactive-form-playground.module';
 import { SquareModule } from './square/square.module';
 import { TEST } from './test.token';
+import { RxTestModule } from './rx-test/rx-test.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     SquareModule,
-    ReactiveFormPlaygroundModule
+    ReactiveFormPlaygroundModule,
+    RxTestModule
   ],
   declarations: [
     AppComponent

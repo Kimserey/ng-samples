@@ -18,6 +18,8 @@ import { Test } from './test.model';
     <button (click)="increase()">+</button>
 
     <app-simple-form></app-simple-form>
+
+    <app-rx-test></app-rx-test>
   `,
   styles: []
 })
