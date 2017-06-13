@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { notACarrotValidator } from './name-validator.directive';
 
 @Component({
   selector: 'app-simple-form',
@@ -28,7 +29,7 @@ export class SimpleFormComponent {
   initializeIngredientForm() {
     return {
         ingredientDescription: this.fb.group({
-          name: '',
+          name: [ '', notACarrotValidator() ],
           quantity: ''
         }),
         description: ''

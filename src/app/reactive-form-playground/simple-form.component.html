@@ -13,7 +13,7 @@
       <div formGroupName="ingredientDescription">
         <div>
           <label>Ingredient name</label>
-          <input type="text" formControlName="name" />
+          <input type="text" formControlName="name"/>
         </div>
         <div>
           <label>Quantity</label>
@@ -31,4 +31,6 @@
 
 <pre>
   {{ recipeForm.value | json }}
+
+  Validity: {{ recipeForm.valid | json }}
 </pre>
