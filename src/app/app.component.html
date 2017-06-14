@@ -1,0 +1,10 @@
+<app-square [show]="true" [side]="side" (something)="onSomething($event)" #square></app-square>
+<strong>{{square.show}}</strong>
+<app-square [show]="true" [side]="5" (something)="onSomething($event)"></app-square>
+<strong>{{surface}}</strong>
+<br />
+<button (click)="increase()">+</button>
+
+<!--<app-rx-test></app-rx-test>-->
+
+<app-simple-form></app-simple-form>

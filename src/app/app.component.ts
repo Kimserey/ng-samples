@@ -6,18 +6,7 @@ import { Test } from './test.model';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <app-square [show]="true" [side]="side" (something)="onSomething($event)" #square></app-square>
-    <strong>{{square.show}}</strong>
-    <app-square [show]="true" [side]="5" (something)="onSomething($event)"></app-square>
-    <strong>{{surface}}</strong>
-    <br />
-    <button (click)="increase()">+</button>
-
-    <app-simple-form></app-simple-form>
-
-    <app-rx-test></app-rx-test>
-  `,
+  templateUrl: 'app.component.html',
   styles: []
 })
 export class AppComponent implements AfterViewInit  {

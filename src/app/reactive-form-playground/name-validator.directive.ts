@@ -4,19 +4,19 @@ import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, Validators } fr
 export function notACarrotValidator(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} => {
     const name = control.value;
-    return name === 'carrot' ? {'forbidCarrot': {name}} : null;
+    return name === 'carrot' ? {'notACarrot': {name}} : null;
   };
 }
 
 @Directive({
-  selector: '[forbidCarrot]',
+  selector: '[notACarrot]',
   providers: [{provide: NG_VALIDATORS, useExisting: NotACarrotValidatorDirective, multi: true}]
 })
 export class NotACarrotValidatorDirective implements Validator, OnChanges {
   private valFn = Validators.nullValidator;
 
   ngOnChanges(changes: SimpleChanges): void {
-    const change = changes['forbidCarrot'];
+    const change = changes['notACarrot'];
     if (change) {
       this.valFn = notACarrotValidator();
     } else {

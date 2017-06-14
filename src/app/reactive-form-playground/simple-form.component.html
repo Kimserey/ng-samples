@@ -17,7 +17,7 @@
       <div formGroupName="ingredientDescription">
         <div>
           <label>Ingredient name</label>
-          <input type="text" formControlName="name"/>
+          <input type="text" formControlName="name" notACarrot/>
         </div>
         <div>
           <label>Quantity</label>
@@ -39,4 +39,9 @@
   {{ recipeForm.value | json }}
 
   Validity: {{ recipeForm.valid | json }}
+</pre>
+
+<pre>
+  Errors on profile:
+  {{ profile.errors | json }}
 </pre>

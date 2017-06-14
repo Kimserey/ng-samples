@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { InjectionToken, NgModule } from '@angular/core';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { Logger } from './logger.service';
@@ -13,7 +14,8 @@ import { RxTestModule } from './rx-test/rx-test.module';
     BrowserModule,
     SquareModule,
     ReactiveFormPlaygroundModule,
-    RxTestModule
+    RxTestModule,
+    HttpModule
   ],
   declarations: [
     AppComponent
