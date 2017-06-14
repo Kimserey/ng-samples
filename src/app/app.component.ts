@@ -7,9 +7,6 @@ import { Test } from './test.model';
 @Component({
   selector: 'app-root',
   template: `
-    <h1>
-      {{title}}
-    </h1>
     <app-square [show]="true" [side]="side" (something)="onSomething($event)" #square></app-square>
     <strong>{{square.show}}</strong>
     <app-square [show]="true" [side]="5" (something)="onSomething($event)"></app-square>
@@ -26,12 +23,10 @@ import { Test } from './test.model';
 export class AppComponent implements AfterViewInit  {
   @ViewChild(SquareComponent) square: SquareComponent;
 
-  title = 'app works!';
   surface = 0;
   side = 1;
 
-  constructor( @Inject(TEST) config: Test) {
-    this.title = this.title + ' ' + config.Test;
+  constructor(@Inject(TEST) config: Test) {
   }
 
   ngAfterViewInit() {
