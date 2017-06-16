@@ -1,10 +1,6 @@
-<app-square [show]="true" [side]="side" (something)="onSomething($event)" #square></app-square>
-<strong>{{square.show}}</strong>
-<app-square [show]="true" [side]="5" (something)="onSomething($event)"></app-square>
-<strong>{{surface}}</strong>
-<br />
-<button (click)="increase()">+</button>
+<strong>Test router</strong>
 
-<!--<app-rx-test></app-rx-test>-->
+<a routerLink="/home" routerLinkActive="active">Home</a>
+<a [routerLink]="onePageRoute" routerLinkActive="active">One page</a>
 
-<app-simple-form></app-simple-form>
+<router-outlet></router-outlet>
