@@ -15,6 +15,10 @@ import { SecondPageComponent } from './one-page/sub-page.component';
 
 const routes: Routes = [
   {
+    path: 'lazy-page',
+    loadChildren: './one-page/one-page.module#OnePageModule'
+  },
+  {
     path: 'home',
     component: HomeComponent
   },
@@ -28,7 +32,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    OnePageModule,
+    // OnePageModule,
     BrowserModule,
     SquareModule,
     ReactiveFormPlaygroundModule,

@@ -6,17 +6,26 @@ import { SecondPageComponent } from './sub-page.component';
 import { SecondPage2Component } from './sub-page-2.component';
 import { SecondPage3Component } from './sub-page-3.component';
 import { TitleResolver } from './title-resolver.service';
+import { AuthGuard } from './auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'one-page',
     component: OnePageComponent,
     data: {
-      test: 'hello'
+      test: 'hello',
+      canActivate: true,
+      canActivateChild: true,
     },
     resolve: {
       someTitle: TitleResolver
     },
+    canActivate: [
+      AuthGuard
+    ],
+    canActivateChild: [
+      AuthGuard
+    ],
     children: [
       {
         path: 'hello',
@@ -26,8 +35,12 @@ const routes: Routes = [
           {
             path: '',
             component: SecondPage2Component,
+            canActivate: [
+              AuthGuard
+            ],
             data: {
-              hello: 'world'
+              hello: 'world',
+              canActivate: true
             }
           },
           {
@@ -67,7 +80,8 @@ const routes: Routes = [
     SecondPage2Component
   ],
   providers: [
-    TitleResolver
+    TitleResolver,
+    AuthGuard
   ]
 })
 export class OnePageModule { }
