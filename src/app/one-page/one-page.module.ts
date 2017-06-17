@@ -5,11 +5,18 @@ import { OnePageComponent } from './one-page.component';
 import { SecondPageComponent } from './sub-page.component';
 import { SecondPage2Component } from './sub-page-2.component';
 import { SecondPage3Component } from './sub-page-3.component';
+import { TitleResolver } from './title-resolver.service';
 
 const routes: Routes = [
   {
     path: 'one-page',
     component: OnePageComponent,
+    data: {
+      test: 'hello'
+    },
+    resolve: {
+      someTitle: TitleResolver
+    },
     children: [
       {
         path: 'hello',
@@ -58,6 +65,9 @@ const routes: Routes = [
     OnePageComponent,
     SecondPageComponent,
     SecondPage2Component
+  ],
+  providers: [
+    TitleResolver
   ]
 })
 export class OnePageModule { }
