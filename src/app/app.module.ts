@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { InjectionToken, NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
-import {AccordionModule} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { Logger } from './logger.service';

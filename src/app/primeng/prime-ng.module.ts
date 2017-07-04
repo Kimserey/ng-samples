@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { GrowlModule } from 'primeng/primeng';
+import { TreeTableModule } from 'primeng/primeng';
 import { PrimeNgComponent } from './prime-ng.component';
 
 const routes: Routes = [
@@ -11,6 +14,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    GrowlModule,
+    TreeTableModule
+  ],
   declarations: [
     PrimeNgComponent
   ]
