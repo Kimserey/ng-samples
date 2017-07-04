@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { InjectionToken, NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
+import {AccordionModule} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { Logger } from './logger.service';
@@ -12,6 +13,8 @@ import { RxTestModule } from './rx-test/rx-test.module';
 import { OnePageModule } from './one-page/one-page.module';
 import { HomeComponent } from './home.component';
 import { SecondPageComponent } from './one-page/sub-page.component';
+import { PrimeNgModule } from './primeng/prime-ng.module';
+import { PrimeNgComponent } from './primeng/prime-ng.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'prime-ng',
+    component: PrimeNgComponent,
   },
   {
     path: '',
@@ -38,6 +45,7 @@ const routes: Routes = [
     ReactiveFormPlaygroundModule,
     RxTestModule,
     HttpModule,
+    PrimeNgModule
   ],
   declarations: [
     AppComponent,
