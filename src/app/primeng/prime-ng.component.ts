@@ -1,64 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import { TreeNode, Message, MenuItem } from 'primeng/primeng';
+import { TreeNode } from 'primeng/primeng';
 
 @Component({
-  templateUrl: 'prime-ng.component.html'
+  template: '<p-tree [value]="files"></p-tree>'
 })
 export class PrimeNgComponent implements OnInit {
-  msgs: Message[];
-  files1: TreeNode[];
-  files2: TreeNode[];
-  files3: TreeNode[];
-  files4: TreeNode[];
-  files5: TreeNode[];
-  files6: TreeNode[];
-  lazyFiles: TreeNode[];
-  selectedFile: TreeNode;
-  selectedFile2: TreeNode;
-  selectedFiles: TreeNode[];
-  selectedFiles2: TreeNode[];
-  items: MenuItem[];
+  files: TreeNode[];
+
+  reducePath = (nodes: TreeNode[], path: string) => {
+    const split = path.split('/');
+
+    if (split.length === 1) {
+      return [
+        ...nodes,
+        {
+          label: split[0],
+          icon: 'fa-file-o'
+        }
+      ];
+    }
+
+    if (nodes.findIndex(n => n.label === split[0]) === -1) {
+      return [
+        ...nodes,
+        {
+          label: split[0],
+          icon: 'fa-folder',
+          children: this.reducePath([], split.slice(1).join('/'))
+        }
+      ];
+    }
+
+    return nodes.map(n => {
+      if (n.label !== split[0]) {
+        return n;
+      }
+
+      return Object.assign({}, n, {
+        children: this.reducePath(n.children, split.slice(1).join('/'))
+      });
+    });
+  }
 
   ngOnInit() {
-    // this.nodeService.getFilesystem().then(files => this.files1 = files);
-    // this.nodeService.getFilesystem().then(files => this.files2 = files);
-    // this.nodeService.getFilesystem().then(files => this.files3 = files);
-    // this.nodeService.getFilesystem().then(files => this.files4 = files);
-    // this.nodeService.getFilesystem().then(files => this.files5 = files);
-    // this.nodeService.getFilesystem().then(files => this.files6 = files);
-    // this.nodeService.getLazyFilesystem().then(files => this.lazyFiles = files);
-
-    this.items = [
-      { label: 'View', icon: 'fa-search', command: (event) => this.viewNode(this.selectedFile2) },
-      { label: 'Delete', icon: 'fa-close', command: (event) => this.deleteNode(this.selectedFile2) }
+    const f = [
+      'folderA/file1.txt',
+      'folderA/file1.txt',
+      'folderA/folderB/file1.txt',
+      'folderA/folderB/file2.txt',
+      'folderC/file1.txt'
     ];
-  }
 
-  nodeSelect(event) {
-    this.msgs = [];
-    this.msgs.push({ severity: 'info', summary: 'Node Selected', detail: event.node.data.name });
-  }
-
-  nodeUnselect(event) {
-    this.msgs = [];
-    this.msgs.push({ severity: 'info', summary: 'Node Unselected', detail: event.node.data.name });
-  }
-
-  nodeExpand(event) {
-    if (event.node) {
-      // in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
-      // this.nodeService.getLazyFilesystem().then(nodes => event.node.children = nodes);
-    }
-  }
-
-  viewNode(node: TreeNode) {
-    this.msgs = [];
-    this.msgs.push({ severity: 'info', summary: 'Node Selected', detail: node.data.name });
-  }
-
-  deleteNode(node: TreeNode) {
-    node.parent.children = node.parent.children.filter(n => n.data !== node.data);
-    this.msgs = [];
-    this.msgs.push({ severity: 'info', summary: 'Node Deleted', detail: node.data.name });
+    this.files = f.reduce(this.reducePath, []);
   }
 }

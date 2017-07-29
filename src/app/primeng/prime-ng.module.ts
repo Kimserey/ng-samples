@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { GrowlModule } from 'primeng/primeng';
+import { TreeModule } from 'primeng/primeng';
 import { TreeTableModule } from 'primeng/primeng';
 import { PrimeNgComponent } from './prime-ng.component';
 
@@ -18,7 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     GrowlModule,
-    TreeTableModule
+    TreeTableModule,
+    TreeModule
   ],
   declarations: [
     PrimeNgComponent
