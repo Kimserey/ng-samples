@@ -48,8 +48,19 @@ export interface QueryRule {
 })
 export class QueryBuilderComponent implements OnInit {
   fields$: Observable<Field[]>;
-  rules: QueryRule[] = [];
+  rules: QueryRule[] = [{
+      label: 'MEMBER SITE',
+      operation: 'IS NOT',
+      value: 'SSS-SEA-1'
+    },
+    {
+      label: 'IS ENABLED',
+      operation: 'IS',
+      value: 'FALSE'
+    }];
   constructor(private fb: FormBuilder) { }
+
+    // (MEMBERSITE::IS NOT::SSS-SEA-1) AND
 
   ngOnInit() {
     this.fields$ = of([
@@ -60,11 +71,7 @@ export class QueryBuilderComponent implements OnInit {
   }
 
   addRule() {
-    this.rules.push({
-      label: '',
-      operation: '',
-      value: ''
-    });
+    this.rules.push(null);
   }
 
   updateResult(i, result) {
@@ -72,6 +79,10 @@ export class QueryBuilderComponent implements OnInit {
     rule.label = result.label;
     rule.operation = result.operation;
     rule.value = result.value;
+  }
+
+  deleteRule(i) {
+    this.rules = this.rules.filter((x, index) => index !== i);
   }
 }
 

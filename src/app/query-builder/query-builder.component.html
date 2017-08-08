@@ -1,7 +1,11 @@
 <div class="bg-faded p-3">
   <button type="button" class="btn btn-primary mb-2" (click)="addRule()">Add rule</button>
   <div *ngFor="let rule of rules; let i=index">
-    <app-query-builder-condition [fields]="fields$ | async" (result)="updateResult(i, $event)">
+    <app-query-builder-condition
+      [rule]="rule"
+      [fields]="fields$ | async"
+      (result)="updateResult(i, $event)"
+      (delete)="deleteRule(i)">
     </app-query-builder-condition>
   </div>
 </div>
