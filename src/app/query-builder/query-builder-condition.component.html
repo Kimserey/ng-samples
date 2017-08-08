@@ -1,0 +1,18 @@
+<div class="row mb-2">
+  <div class="col-sm-4">
+    <select class="form-control" [(ngModel)]="field" (ngModelChange)="updateOperationAndValue()">
+      <option *ngFor="let field of fields" [ngValue]="field">{{field.label}}</option>
+    </select>
+  </div>
+  <div class="col-sm-4">
+    <select class="form-control" *ngIf="!!operations && operations.length > 0" [(ngModel)]="operation" (ngModelChange)="updateValues()">
+      <option *ngFor="let operation of operations" [value]="operation">{{operation}}</option>
+    </select>
+  </div>
+  <div class="col-sm-4">
+    <select class="form-control" *ngIf="!!values && values.length > 0" [(ngModel)]="value" (ngModelChange)="updateValues()">
+      <option *ngFor="let value of values" [value]="value">{{value}}</option>
+    </select>
+    <input class="form-control" type="text" *ngIf="!!values && values.length === 0" [(ngModel)]="value" (ngModelChange)="updateValues()"/>
+  </div>
+</div>
