@@ -68,7 +68,10 @@ export class QueryBuilderComponent implements OnInit {
   }
 
   updateResult(i, result) {
-    alert(JSON.stringify(result));
+    const rule = this.rules[i];
+    rule.label = result.label;
+    rule.operation = result.operation;
+    rule.value = result.value;
   }
 }
 
