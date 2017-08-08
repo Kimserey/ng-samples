@@ -14,6 +14,8 @@ import { HomeComponent } from './home.component';
 import { SecondPageComponent } from './one-page/sub-page.component';
 import { PrimeNgModule } from './primeng/prime-ng.module';
 import { PrimeNgComponent } from './primeng/prime-ng.component';
+import { QueryBuilderModule } from './query-builder/query-builder.module';
+import { QueryBuilderComponent } from './query-builder/query-builder.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,10 @@ const routes: Routes = [
   {
     path: 'prime-ng',
     component: PrimeNgComponent,
+  },
+  {
+    path: 'query-builder',
+    component: QueryBuilderComponent
   },
   {
     path: '',
@@ -44,7 +50,8 @@ const routes: Routes = [
     ReactiveFormPlaygroundModule,
     RxTestModule,
     HttpModule,
-    PrimeNgModule
+    PrimeNgModule,
+    QueryBuilderModule
   ],
   declarations: [
     AppComponent,
