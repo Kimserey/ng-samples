@@ -31,14 +31,14 @@ const routes: Routes = [
     component: PrimeNgComponent,
   },
   {
-    path: 'query-builder',
+    path: '',
     component: QueryBuilderComponent
   },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  }
+  // {
+  //   path: '',
+  //   redirectTo: 'home',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

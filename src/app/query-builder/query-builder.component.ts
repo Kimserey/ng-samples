@@ -3,70 +3,35 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-
-export const TEXT_FIELD_TYPE = 'Text Field';
-export const CHECKBOX_FIELD_TYPE = 'Checkbox Field';
-export const NUMBER_FIELD_TYPE = 'Number Field';
-export const SELECTION_FIELD_TYPE = 'Selection Field';
-
-export interface TextField {
-  label: string;
-  type: string;
-}
-
-export interface CheckboxField {
-  label: string;
-  type: string;
-}
-
-export interface NumberField {
-  label: string;
-  type: string;
-}
-
-export interface SelectionField {
-  label: string;
-  entity: string;
-  type: string;
-}
-
-export type Field =
-  TextField
-  | NumberField
-  | CheckboxField
-  | SelectionField;
-
-export interface QueryRule {
-  label: string;
-  operation: string;
-  value: string;
-}
+import { SelectionField, CheckboxField, Field, NumberField, SELECTION_FIELD_TYPE, CHECKBOX_FIELD_TYPE, NUMBER_FIELD_TYPE } from './query-builder.model';
+import { QueryRule } from './query-rule.model';
 
 @Component({
   selector: 'app-query-builder',
   templateUrl: 'query-builder.component.html',
 })
 export class QueryBuilderComponent implements OnInit {
+  msField: SelectionField = { label: 'MEMBER SITE', type: SELECTION_FIELD_TYPE, entity: 'MEMBERSITE' };
+  isEnField: CheckboxField = { label: 'IS ENABLED', type: CHECKBOX_FIELD_TYPE };
+
   fields$: Observable<Field[]>;
   rules: QueryRule[] = [{
-      label: 'MEMBER SITE',
+      field: this.msField,
       operation: 'IS NOT',
-      value: 'SSS-SEA-1'
+      value: 'MS-1'
     },
     {
-      label: 'IS ENABLED',
+      field: this.isEnField,
       operation: 'IS',
       value: 'FALSE'
     }];
   constructor(private fb: FormBuilder) { }
 
-    // (MEMBERSITE::IS NOT::SSS-SEA-1) AND
-
   ngOnInit() {
     this.fields$ = of([
-      <SelectionField>{ label: 'MEMBER SITE', type: SELECTION_FIELD_TYPE, entity: 'MEMBERSITE' },
+      this.msField,
       <NumberField>{ label: 'NUMBER OF VIP', type: NUMBER_FIELD_TYPE },
-      <CheckboxField>{ label: 'IS ENABLED', type: CHECKBOX_FIELD_TYPE }
+      this.isEnField
     ]);
   }
 
@@ -76,7 +41,7 @@ export class QueryBuilderComponent implements OnInit {
 
   updateResult(i, result) {
     const rule = this.rules[i];
-    rule.label = result.label;
+    rule.field = result.field;
     rule.operation = result.operation;
     rule.value = result.value;
   }
