@@ -10,7 +10,7 @@ import { QueryRule } from './models/query-rule.model';
   selector: 'app-operation-select',
   template: `
     <select class="form-control" (change)="select($event.target.value)">
-      <option disabled selected>-- select an operation --</option>
+      <option disabled selected>-- Select an operation --</option>
       <option *ngFor="let operation of operations" [value]="operation">{{operation}}</option>
     </select>
   `,

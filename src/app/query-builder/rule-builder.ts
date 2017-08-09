@@ -15,8 +15,6 @@ export class RuleBuilderComponent implements OnInit {
 
   edit = false;
   newModel = false;
-  operations: string[] | null;
-  values: string[] | null;
   backupModel: QueryRule;
   model: QueryRule;
 
@@ -57,18 +55,5 @@ export class RuleBuilderComponent implements OnInit {
 
   deleteRule() {
     this.delete.emit();
-  }
-
-  resetValue() {
-    this.model.operation = null;
-    this.model.value = null;
-  }
-
-  selectOperation(operation) {
-    this.model.operation = operation;
-  }
-
-  selectValue(value) {
-    this.model.value = value;
   }
 }

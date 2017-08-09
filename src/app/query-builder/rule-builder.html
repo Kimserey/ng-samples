@@ -8,17 +8,15 @@
     <form novalidate (ngSubmit)="submit()" *ngIf="edit" #ruleForm="ngForm">
       <div class="form-group">
         <label><strong>Property</strong></label>
-        <select class="form-control" [(ngModel)]="model.field" name="field">
-          <option *ngFor="let field of fields" [ngValue]="field">{{field.label}}</option>
-        </select>
+        <app-property-select [fields]="fields" (selection)="model.field = $event"></app-property-select>
       </div>
       <div class="form-group" *ngIf="model.field">
         <label><strong>Operation</strong></label>
-        <app-operation-select [fieldType]="model.field?.type" (selection)="selectOperation($event)"></app-operation-select>
+        <app-operation-select [fieldType]="model.field?.type" (selection)="model.operation = $event"></app-operation-select>
       </div>
       <div class="form-group" *ngIf="model.field && model.operation">
         <label><strong>Value</strong></label>
-        <app-value-select [fieldType]="model.field?.type" (selection)="selectValue($event)"></app-value-select>
+        <app-value-select [fieldType]="model.field?.type" (selection)="model.value = $event"></app-value-select>
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="!model.field || !model.operation || !model.value">Save</button>
       <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>

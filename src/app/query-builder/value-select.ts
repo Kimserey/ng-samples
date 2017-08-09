@@ -10,7 +10,7 @@ import { QueryRule } from './models/query-rule.model';
   selector: 'app-value-select',
   template: `
     <select class="form-control" *ngIf="(values$ | async).length > 0; else textInput" (change)="select($event.target.value)">
-      <option disabled selected>-- select a value --</option>
+      <option disabled selected>-- Select a value --</option>
       <option *ngFor="let value of values$ | async" [value]="value">{{value}}</option>
     </select>
     <ng-template #textInput>
