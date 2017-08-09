@@ -1,11 +1,16 @@
 <div class="bg-faded p-3">
-  <button type="button" class="btn btn-primary mb-2" (click)="addRule()">Add rule</button>
-  <div *ngFor="let rule of rules; let i=index">
+  <button type="button" class="btn btn-primary mb-3" (click)="addRule()">Add rule</button>
+  <div *ngFor="let rule of rules; index as i; last as last">
     <app-rule-builder
       [rule]="rule"
       [fields]="fields$ | async"
       (result)="updateResult(i, $event)"
       (delete)="deleteRule(i)">
     </app-rule-builder>
+    <div class="row my-1" *ngIf="!last">
+      <div class="col-5"><hr/></div>
+      <div class="col-2 text-center"><small class="align-middle font-weight-bold text-uppercase">AND</small></div>
+      <div class="col-5"><hr/></div>
+    </div>
   </div>
 </div>

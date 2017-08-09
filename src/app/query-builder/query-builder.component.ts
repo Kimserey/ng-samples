@@ -44,10 +44,7 @@ export class QueryBuilderComponent implements OnInit {
   }
 
   updateResult(i, result) {
-    const rule = this.rules[i];
-    rule.field = result.field;
-    rule.operation = result.operation;
-    rule.value = result.value;
+    this.rules[i] = result;
   }
 
   deleteRule(i) {

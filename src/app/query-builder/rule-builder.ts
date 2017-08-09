@@ -52,9 +52,11 @@ export class RuleBuilderComponent implements OnInit {
     this.delete.emit();
   }
 
-  updateOperationsAndValues() {
-    this.model.operation = null;
-    this.model.value = null;
+  updateOperationsAndValues(reset?) {
+    if (reset) {
+      this.model.operation = null;
+      this.model.value = null;
+    }
 
     switch (this.model.field.type) {
       case TEXT_FIELD_TYPE:
