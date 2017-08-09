@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { SelectionField, CheckboxField, Field, NumberField, SELECTION_FIELD_TYPE, CHECKBOX_FIELD_TYPE, NUMBER_FIELD_TYPE, TEXT_FIELD_TYPE } from './query-builder.model';
-import { QueryRule } from './query-rule.model';
+import { SelectionField, CheckboxField, Field, NumberField, SELECTION_FIELD_TYPE, CHECKBOX_FIELD_TYPE, NUMBER_FIELD_TYPE, TEXT_FIELD_TYPE } from './models/query-builder.model';
+import { QueryRule } from './models/query-rule.model';
 
 @Component({
   selector: 'app-rule-builder',
@@ -63,6 +63,10 @@ export class RuleBuilderComponent implements OnInit {
   resetValue() {
     this.model.operation = null;
     this.model.value = null;
+  }
+
+  selectOperation(operation) {
+    this.model.operation = operation;
   }
 
   updateOperationsAndValues() {

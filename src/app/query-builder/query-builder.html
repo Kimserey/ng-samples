@@ -3,13 +3,13 @@
   <div *ngFor="let rule of rules; index as i; last as last">
     <app-rule-builder
       [rule]="rule"
-      [fields]="fields$ | async"
+      [fields]="fields"
       (result)="updateResult(i, $event)"
       (delete)="deleteRule(i)">
     </app-rule-builder>
     <div class="row my-1" *ngIf="!last">
       <div class="col-5"><hr/></div>
-      <div class="col-2 text-center"><small class="align-middle font-weight-bold text-uppercase">AND</small></div>
+      <div class="col-2 text-center"><small class="align-middle font-weight-bold text-uppercase condition-clause">AND</small></div>
       <div class="col-5"><hr/></div>
     </div>
   </div>

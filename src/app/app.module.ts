@@ -14,8 +14,9 @@ import { HomeComponent } from './home.component';
 import { SecondPageComponent } from './one-page/sub-page.component';
 import { PrimeNgModule } from './primeng/prime-ng.module';
 import { PrimeNgComponent } from './primeng/prime-ng.component';
-import { QueryBuilderModule } from './query-builder/query-builder.module';
-import { QueryBuilderComponent } from './query-builder/query-builder.component';
+import { QueryBuilderModule } from './query-builder/module';
+import { QueryBuilderComponent } from './query-builder/query-builder';
+import { MainQueryBuilderComponent } from './query-builder/main';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: QueryBuilderComponent
+    component: MainQueryBuilderComponent
   },
   // {
   //   path: '',
