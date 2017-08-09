@@ -12,34 +12,39 @@ export class RuleBuilderComponent implements OnInit {
   @Input() rule: QueryRule;
   @Output() result = new EventEmitter<QueryRule>();
   @Output() delete = new EventEmitter<void>();
+
   edit = false;
   operations: string[] | null;
   values: string[] | null;
-
-  formModel: QueryRule;
-
-  get diagnostic() { return JSON.stringify(this.formModel); }
+  backupModel: QueryRule;
+  model: QueryRule;
 
   ngOnInit() {
-    if (!!this.rule) {
-      this.formModel = {
-        field: this.fields[0],
+    if (!this.rule) {
+      this.model = {
+        field: null,
         operation: null,
         value: null
       };
+      this.edit = true;
     } else {
-      this.formModel = Object.assign({}, this.rule);
+      this.model = Object.assign({}, this.rule);
+      this.updateOperationsAndValues();
     }
-
-    this.updateOperationsAndValues();
   }
 
   submit() {
-    this.result.emit(Object.assign({}, this.formModel));
+    this.result.emit(Object.assign({}, this.model));
     this.edit = false;
   }
 
+  modify() {
+    this.backupModel = Object.assign({}, this.model);
+    this.edit = true;
+  }
+
   cancel() {
+    this.model = Object.assign({}, this.backupModel);
     this.edit = false;
   }
 
@@ -48,7 +53,10 @@ export class RuleBuilderComponent implements OnInit {
   }
 
   updateOperationsAndValues() {
-    switch (this.formModel.field.type) {
+    this.model.operation = null;
+    this.model.value = null;
+
+    switch (this.model.field.type) {
       case TEXT_FIELD_TYPE:
         this.operations = ['is', 'is not', 'match'];
         this.values = [];

@@ -1,30 +1,32 @@
 <div class="card card-outline-secondary mb-3">
   <div class="card-block">
-    <strong>{{formModel.field.label}} {{formModel.operation}} {{formModel.value}}</strong> <button class="btn btn-link float-right" (click)="edit = true" *ngIf="!edit">change</button>
-    <form novalidate (ngSubmit)="submit()" *ngIf="edit">
+    <div *ngIf="!edit">
+      <span>{{model?.field?.label}} {{model?.operation}}</span> <strong class="text-primary">{{model?.value}}</strong>
+      <button class="btn btn-link p-0 float-right" (click)="modify()" *ngIf="!edit">modify</button>
+    </div>
+
+    <form novalidate (ngSubmit)="submit()" *ngIf="edit" #ruleForm="ngForm">
       <div class="form-group">
         <label><strong>Property</strong></label>
-        <select class="form-control" [(ngModel)]="formModel.field" (ngModelChange)="updateOperationsAndValues()" name="field">
+        <select class="form-control" [(ngModel)]="model.field" (ngModelChange)="updateOperationsAndValues()" name="field" required>
           <option *ngFor="let field of fields" [ngValue]="field">{{field.label}}</option>
         </select>
       </div>
-      <div class="form-group">
+      <div class="form-group" *ngIf="model.field">
         <label><strong>Operation</strong></label>
-        <select class="form-control" *ngIf="!!operations && operations.length > 0" [(ngModel)]="formModel.operation" name="operation">
+        <select class="form-control" *ngIf="!!operations && operations.length > 0" [(ngModel)]="model.operation" name="operation" required>
           <option *ngFor="let operation of operations" [value]="operation">{{operation}}</option>
         </select>
-        <p *ngIf="!formModel.operation">A property needs to be selected before the operation is.</p>
       </div>
-      <div class="form-group">
+      <div class="form-group" *ngIf="model.field && model.operation">
         <label><strong>Value</strong></label>
-        <select class="form-control" *ngIf="!!values && values.length > 0" [(ngModel)]="formModel.value">
+        <select class="form-control" *ngIf="!!values && values.length > 0" [(ngModel)]="model.value" name="value" required>
           <option *ngFor="let value of values" [value]="value">{{value}}</option>
         </select>
-        <input class="form-control" type="text" *ngIf="!!values && values.length === 0" [(ngModel)]="formModel.value" name="value"/>
-        <p *ngIf="!formModel.operation">A property needs to be selected before the value is.</p>
+        <input *ngIf="!!values && values.length === 0" class="form-control" type="text" [(ngModel)]="model.value" name="value" required/>
       </div>
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-secondary">Cancel</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!ruleForm.form.valid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
       <button type="button" class="btn btn-danger float-right" (click)="deleteRule()">Delete</button>
     </form>
   </div>
