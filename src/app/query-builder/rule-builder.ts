@@ -14,6 +14,7 @@ export class RuleBuilderComponent implements OnInit {
   @Output() delete = new EventEmitter<void>();
 
   edit = false;
+  newModel = false;
   operations: string[] | null;
   values: string[] | null;
   backupModel: QueryRule;
@@ -27,8 +28,11 @@ export class RuleBuilderComponent implements OnInit {
         value: null
       };
       this.edit = true;
+      this.newModel = true;
     } else {
       this.model = Object.assign({}, this.rule);
+      this.edit = false;
+      this.newModel = false;
       this.updateOperationsAndValues();
     }
   }
@@ -46,18 +50,22 @@ export class RuleBuilderComponent implements OnInit {
   cancel() {
     this.model = Object.assign({}, this.backupModel);
     this.edit = false;
+
+    if (this.newModel) {
+      this.deleteRule();
+    }
   }
 
   deleteRule() {
     this.delete.emit();
   }
 
-  updateOperationsAndValues(reset?) {
-    if (reset) {
-      this.model.operation = null;
-      this.model.value = null;
-    }
+  resetValue() {
+    this.model.operation = null;
+    this.model.value = null;
+  }
 
+  updateOperationsAndValues() {
     switch (this.model.field.type) {
       case TEXT_FIELD_TYPE:
         this.operations = ['is', 'is not', 'match'];

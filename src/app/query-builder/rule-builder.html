@@ -8,7 +8,7 @@
     <form novalidate (ngSubmit)="submit()" *ngIf="edit" #ruleForm="ngForm">
       <div class="form-group">
         <label><strong>Property</strong></label>
-        <select class="form-control" [(ngModel)]="model.field" (ngModelChange)="updateOperationsAndValues(true)" name="field" required>
+        <select class="form-control" [(ngModel)]="model.field" (ngModelChange)="resetValue(); updateOperationsAndValues()" name="field" required>
           <option *ngFor="let field of fields" [ngValue]="field">{{field.label}}</option>
         </select>
       </div>
@@ -27,7 +27,7 @@
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="!ruleForm.form.valid">Save</button>
       <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
-      <button type="button" class="btn btn-danger float-right" (click)="deleteRule()">Delete</button>
+      <button type="button" class="btn btn-danger float-right" (click)="deleteRule()" *ngIf="!newModel">Delete</button>
     </form>
   </div>
 </div>
