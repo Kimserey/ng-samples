@@ -33,7 +33,6 @@ export class RuleBuilderComponent implements OnInit {
       this.model = Object.assign({}, this.rule);
       this.edit = false;
       this.newModel = false;
-      this.updateOperationsAndValues();
     }
   }
 
@@ -69,32 +68,7 @@ export class RuleBuilderComponent implements OnInit {
     this.model.operation = operation;
   }
 
-  updateOperationsAndValues() {
-    switch (this.model.field.type) {
-      case TEXT_FIELD_TYPE:
-        this.operations = ['is', 'is not', 'match'];
-        this.values = [];
-        break;
-
-      case CHECKBOX_FIELD_TYPE:
-        this.operations = ['is', 'is not'];
-        this.values = ['True', 'False'];
-        break;
-
-      case NUMBER_FIELD_TYPE:
-        this.operations = ['=', '<', '<=', '>', '>='];
-        this.values = [];
-        break;
-
-      case SELECTION_FIELD_TYPE:
-        this.operations = ['is', 'is not'];
-        this.values = ['SSS-SEA-1', 'SSS-SEA-2'];
-        break;
-
-      default:
-        this.operations = null;
-        this.values = null;
-        break;
-    }
+  selectValue(value) {
+    this.model.value = value;
   }
 }

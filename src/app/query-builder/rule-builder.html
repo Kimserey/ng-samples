@@ -8,21 +8,17 @@
     <form novalidate (ngSubmit)="submit()" *ngIf="edit" #ruleForm="ngForm">
       <div class="form-group">
         <label><strong>Property</strong></label>
-        <select class="form-control" [(ngModel)]="model.field" (ngModelChange)="resetValue(); updateOperationsAndValues()" name="field" required>
+        <select class="form-control" [(ngModel)]="model.field" name="field">
           <option *ngFor="let field of fields" [ngValue]="field">{{field.label}}</option>
         </select>
       </div>
       <div class="form-group" *ngIf="model.field">
         <label><strong>Operation</strong></label>
-        <app-operation-select *ngIf="!!operations && operations.length > 0" [fieldType]="model.field?.type" (selection)="selectOperation($event)"></app-operation-select>
+        <app-operation-select [fieldType]="model.field?.type" (selection)="selectOperation($event)"></app-operation-select>
       </div>
       <div class="form-group" *ngIf="model.field && model.operation">
         <label><strong>Value</strong></label>
-        <!-- <select class="form-control" *ngIf="!!values && values.length > 0" [(ngModel)]="model.value" name="value" required>
-          <option disabled selected>-- select a value --</option>
-          <option *ngFor="let value of values" [value]="value">{{value}}</option>
-        </select>
-        <input *ngIf="!!values && values.length === 0" class="form-control" type="text" [(ngModel)]="model.value" name="value" required/> -->
+        <app-value-select [fieldType]="model.field?.type" (selection)="selectValue($event)"></app-value-select>
       </div>
       <button type="submit" class="btn btn-primary" [disabled]="!model.field || !model.operation || !model.value">Save</button>
       <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>

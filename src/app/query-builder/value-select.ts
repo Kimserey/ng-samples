@@ -9,32 +9,44 @@ import { QueryRule } from './models/query-rule.model';
 @Component({
   selector: 'app-value-select',
   template: `
-    <select class="form-control" (change)="">
+    <select class="form-control" *ngIf="!!(values | async) && (values | async).length > 0" (change)="select($event.target.value)">
       <option disabled selected>-- select a value --</option>
-      <option *ngFor="let value of values" [value]="value">{{value}}</option>
+      <option *ngFor="let value of values | async" [value]="value">{{value}}</option>
     </select>
-    <input *ngIf="!!values && values.length === 0" class="form-control" type="text"/>
+    <input class="form-control" type="text" *ngIf="!!(values | async) && (values | async).length === 0" (change)="select($event.target.value)"/>
   `,
 })
 export class ValueSelectComponent implements OnChanges {
   @Input() fieldType: string;
   @Output() selection = new EventEmitter<string>();
 
-  values: string[];
+  values: Observable<string[]>;
+
+  select(value) {
+    this.selection.emit(value);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
-
+    if (changes['fieldType']) {
+      this.values = this.getValues(changes['fieldType'].currentValue);
+    }
   }
 
   getValues(type) {
     switch (this.fieldType) {
-      case SELECTION_FIELD_TYPE:
-        return [
-          'is',
-          'is not'
-        ];
+      case TEXT_FIELD_TYPE:
+      case NUMBER_FIELD_TYPE:
+        return of([]);
 
-      default: return null;
+      case CHECKBOX_FIELD_TYPE:
+        return of(['True', 'False']);
+
+      case SELECTION_FIELD_TYPE:
+        // get values from a service
+        return of(['SSS-SEA-1', 'SSS-SEA-2']);
+
+      default:
+        return null;
     }
   }
 }

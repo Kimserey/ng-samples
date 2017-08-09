@@ -9,7 +9,7 @@ import { QueryRule } from './models/query-rule.model';
 @Component({
   selector: 'app-operation-select',
   template: `
-    <select class="form-control" (change)="selectOperation($event.target.value)">
+    <select class="form-control" (change)="select($event.target.value)">
       <option disabled selected>-- select an operation --</option>
       <option *ngFor="let operation of operations" [value]="operation">{{operation}}</option>
     </select>
@@ -21,7 +21,7 @@ export class OperationSelectComponent implements OnChanges {
 
   operations: string[];
 
-  selectOperation(operation) {
+  select(operation) {
     this.selection.emit(operation);
   }
 

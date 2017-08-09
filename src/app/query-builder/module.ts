@@ -6,6 +6,7 @@ import { RuleBuilderComponent } from './rule-builder';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainQueryBuilderComponent } from './main';
 import { OperationSelectComponent } from './operation-select';
+import { ValueSelectComponent } from './value-select';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { OperationSelectComponent } from './operation-select';
     QueryBuilderComponent,
     RuleBuilderComponent,
     MainQueryBuilderComponent,
-    OperationSelectComponent
+    OperationSelectComponent,
+    ValueSelectComponent
   ],
   exports: [
   ]
