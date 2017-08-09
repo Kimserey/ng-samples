@@ -10,6 +10,7 @@ import { QueryRule } from './models/query-rule.model';
   selector: 'app-operation-select',
   template: `
     <select class="form-control" (change)="selectOperation($event.target.value)">
+      <option disabled selected>-- select an operation --</option>
       <option *ngFor="let operation of operations" [value]="operation">{{operation}}</option>
     </select>
   `,
@@ -27,7 +28,6 @@ export class OperationSelectComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fieldType']) {
       this.operations = this.getOperations(changes['fieldType'].currentValue);
-      this.selectOperation(this.operations[0]);
     }
   }
 
