@@ -9,18 +9,20 @@ import { QueryRule } from './models/query-rule.model';
 @Component({
   selector: 'app-value-select',
   template: `
-    <select class="form-control" *ngIf="!!(values | async) && (values | async).length > 0" (change)="select($event.target.value)">
+    <select class="form-control" *ngIf="(values$ | async).length > 0; else textInput" (change)="select($event.target.value)">
       <option disabled selected>-- select a value --</option>
-      <option *ngFor="let value of values | async" [value]="value">{{value}}</option>
+      <option *ngFor="let value of values$ | async" [value]="value">{{value}}</option>
     </select>
-    <input class="form-control" type="text" *ngIf="!!(values | async) && (values | async).length === 0" (change)="select($event.target.value)"/>
+    <ng-template #textInput>
+      <input class="form-control" type="text" (change)="select($event.target.value)"/>
+    </ng-template>
   `,
 })
 export class ValueSelectComponent implements OnChanges {
   @Input() fieldType: string;
   @Output() selection = new EventEmitter<string>();
 
-  values: Observable<string[]>;
+  values$: Observable<string[]>;
 
   select(value) {
     this.selection.emit(value);
@@ -28,7 +30,7 @@ export class ValueSelectComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['fieldType']) {
-      this.values = this.getValues(changes['fieldType'].currentValue);
+      this.values$ = this.getValues(changes['fieldType'].currentValue);
     }
   }
 
