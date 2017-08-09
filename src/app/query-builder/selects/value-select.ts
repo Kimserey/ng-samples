@@ -3,23 +3,23 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { SelectionField, CheckboxField, Field, NumberField, SELECTION_FIELD_TYPE, CHECKBOX_FIELD_TYPE, NUMBER_FIELD_TYPE, TEXT_FIELD_TYPE } from './models/query-builder.model';
-import { QueryRule } from './models/query-rule.model';
+import { SelectionField, CheckboxField, Field, NumberField, SELECTION_FIELD_TYPE, CHECKBOX_FIELD_TYPE, NUMBER_FIELD_TYPE, TEXT_FIELD_TYPE } from '../models/query-builder.model';
+import { QueryRule } from '../models/query-rule.model';
 
 @Component({
   selector: 'app-value-select',
   template: `
-    <select class="form-control" *ngIf="(values$ | async).length > 0; else textInput" (change)="select($event.target.value)">
-      <option disabled selected>-- Select a value --</option>
+    <select class="form-control" *ngIf="(values$ | async).length > 0; else textInput" [ngModel]="initialValue" (ngModelChange)="select($event)">
       <option *ngFor="let value of values$ | async" [value]="value">{{value}}</option>
     </select>
     <ng-template #textInput>
-      <input class="form-control" type="text" (change)="select($event.target.value)"/>
+      <input class="form-control" type="text" [ngModel]="initialValue" (ngModelChange)="select($event.target.value)"/>
     </ng-template>
   `,
 })
 export class ValueSelectComponent implements OnChanges {
   @Input() fieldType: string;
+  @Input() initialValue: string;
   @Output() selection = new EventEmitter<string>();
 
   values$: Observable<string[]>;
@@ -45,7 +45,7 @@ export class ValueSelectComponent implements OnChanges {
 
       case SELECTION_FIELD_TYPE:
         // get values from a service
-        return of(['SSS-SEA-1', 'SSS-SEA-2']);
+        return of(['MS-1', 'MS-2']);
 
       default:
         return null;

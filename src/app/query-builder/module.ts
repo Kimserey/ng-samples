@@ -5,9 +5,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RuleBuilderComponent } from './rule-builder';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainQueryBuilderComponent } from './main';
-import { OperationSelectComponent } from './operation-select';
-import { ValueSelectComponent } from './value-select';
-import { PropertySelectComponent } from './property-select';
+import { OperationSelectComponent } from './selects/operation-select';
+import { ValueSelectComponent } from './selects/value-select';
+import { PropertySelectComponent } from './selects/property-select';
 
 @NgModule({
   imports: [

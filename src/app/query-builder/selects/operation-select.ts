@@ -3,20 +3,20 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { SelectionField, CheckboxField, Field, NumberField, SELECTION_FIELD_TYPE, CHECKBOX_FIELD_TYPE, NUMBER_FIELD_TYPE, TEXT_FIELD_TYPE } from './models/query-builder.model';
-import { QueryRule } from './models/query-rule.model';
+import { SelectionField, CheckboxField, Field, NumberField, SELECTION_FIELD_TYPE, CHECKBOX_FIELD_TYPE, NUMBER_FIELD_TYPE, TEXT_FIELD_TYPE } from '../models/query-builder.model';
+import { QueryRule } from '../models/query-rule.model';
 
 @Component({
   selector: 'app-operation-select',
   template: `
-    <select class="form-control" (change)="select($event.target.value)">
-      <option disabled selected>-- Select an operation --</option>
+    <select class="form-control" [ngModel]="initialValue" (ngModelChange)="select($event)">
       <option *ngFor="let operation of operations" [value]="operation">{{operation}}</option>
     </select>
   `,
 })
 export class OperationSelectComponent implements OnChanges {
   @Input() fieldType: string;
+  @Input() initialValue: string;
   @Output() selection = new EventEmitter<string>();
 
   operations: string[];

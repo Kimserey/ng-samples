@@ -31,12 +31,12 @@ export class MainQueryBuilderComponent implements OnInit {
 
     this.rules$ = of([{
       field: msField,
-      operation: 'IS NOT',
+      operation: 'is not',
       value: 'MS-1'
     },
     {
       field: isEnField,
-      operation: 'IS',
+      operation: 'is',
       value: 'FALSE'
     }]);
   }
