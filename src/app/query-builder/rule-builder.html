@@ -5,7 +5,7 @@
       <button class="btn btn-link p-0 float-right" (click)="modify()" *ngIf="!edit">modify</button>
     </div>
 
-    <form novalidate (ngSubmit)="submit()" *ngIf="edit" #ruleForm="ngForm">
+    <form novalidate (ngSubmit)="submit()" *ngIf="edit">
       <div class="form-group">
         <label><strong>Property</strong></label>
         <app-property-select [fields]="fields" [initialValue]="model.field?.label" (selection)="model.field = $event"></app-property-select>
