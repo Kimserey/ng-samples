@@ -29,9 +29,3 @@ export type Field =
   | NumberField
   | CheckboxField
   | SelectionField;
-
-export interface QueryRule {
-  field: Field;
-  operation: string;
-  value: string;
-}

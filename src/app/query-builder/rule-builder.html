@@ -1,17 +1,16 @@
 <div class="card card-outline-secondary mb-3">
   <div class="card-block">
-    <strong>{{field.label}} {{operation}} {{value}}</strong> <button class="btn btn-link float-right">change</button>
-    {{diagnostic}}
-    <form novalidate (ngSubmit)="submit()">
+    <strong>{{formModel.field.label}} {{formModel.operation}} {{formModel.value}}</strong> <button class="btn btn-link float-right" (click)="edit = true" *ngIf="!edit">change</button>
+    <form novalidate (ngSubmit)="submit()" *ngIf="edit">
       <div class="form-group">
         <label><strong>Property</strong></label>
-        <select class="form-control" [(ngModel)]="formModel.field" (ngModelChange)="updateOperationsAndValues()">
+        <select class="form-control" [(ngModel)]="formModel.field" (ngModelChange)="updateOperationsAndValues()" name="field">
           <option *ngFor="let field of fields" [ngValue]="field">{{field.label}}</option>
         </select>
       </div>
       <div class="form-group">
         <label><strong>Operation</strong></label>
-        <select class="form-control" *ngIf="!!operations && operations.length > 0" [(ngModel)]="formModel.operation">
+        <select class="form-control" *ngIf="!!operations && operations.length > 0" [(ngModel)]="formModel.operation" name="operation">
           <option *ngFor="let operation of operations" [value]="operation">{{operation}}</option>
         </select>
         <p *ngIf="!formModel.operation">A property needs to be selected before the operation is.</p>
@@ -21,7 +20,7 @@
         <select class="form-control" *ngIf="!!values && values.length > 0" [(ngModel)]="formModel.value">
           <option *ngFor="let value of values" [value]="value">{{value}}</option>
         </select>
-        <input class="form-control" type="text" *ngIf="!!values && values.length === 0" [(ngModel)]="formModel.value"/>
+        <input class="form-control" type="text" *ngIf="!!values && values.length === 0" [(ngModel)]="formModel.value" name="value"/>
         <p *ngIf="!formModel.operation">A property needs to be selected before the value is.</p>
       </div>
       <button type="submit" class="btn btn-primary">Save</button>

@@ -15,16 +15,20 @@ export class QueryBuilderComponent implements OnInit {
   isEnField: CheckboxField = { label: 'IS ENABLED', type: CHECKBOX_FIELD_TYPE };
 
   fields$: Observable<Field[]>;
-  rules: QueryRule[] = [{
-      field: this.msField,
-      operation: 'IS NOT',
-      value: 'MS-1'
-    },
-    {
-      field: this.isEnField,
-      operation: 'IS',
-      value: 'FALSE'
-    }];
+
+  rules: QueryRule[] = [];
+
+  // rules: QueryRule[] = [{
+  //     field: this.msField,
+  //     operation: 'IS NOT',
+  //     value: 'MS-1'
+  //   },
+  //   {
+  //     field: this.isEnField,
+  //     operation: 'IS',
+  //     value: 'FALSE'
+  //   }];
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {

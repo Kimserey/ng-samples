@@ -12,7 +12,7 @@ export class RuleBuilderComponent implements OnInit {
   @Input() rule: QueryRule;
   @Output() result = new EventEmitter<QueryRule>();
   @Output() delete = new EventEmitter<void>();
-
+  edit = false;
   operations: string[] | null;
   values: string[] | null;
 
@@ -21,8 +21,14 @@ export class RuleBuilderComponent implements OnInit {
   get diagnostic() { return JSON.stringify(this.formModel); }
 
   ngOnInit() {
-    if (!this.rule) {
-      return;
+    if (!!this.rule) {
+      this.formModel = {
+        field: this.fields[0],
+        operation: null,
+        value: null
+      };
+    } else {
+      this.formModel = Object.assign({}, this.rule);
     }
 
     this.updateOperationsAndValues();
@@ -30,6 +36,15 @@ export class RuleBuilderComponent implements OnInit {
 
   submit() {
     this.result.emit(Object.assign({}, this.formModel));
+    this.edit = false;
+  }
+
+  cancel() {
+    this.edit = false;
+  }
+
+  deleteRule() {
+    this.delete.emit();
   }
 
   updateOperationsAndValues() {
@@ -59,9 +74,5 @@ export class RuleBuilderComponent implements OnInit {
         this.values = null;
         break;
     }
-  }
-
-  deleteRule() {
-    this.delete.emit();
   }
 }
