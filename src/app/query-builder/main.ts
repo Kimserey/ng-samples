@@ -13,7 +13,7 @@ import { QueryRule } from './models/query-rule.model';
     [fields]="fields$ | async"
     [rules]="rules$ | async"
     (result)="submit($event)"></app-query-builder>
-  `,
+  `
 })
 export class MainQueryBuilderComponent implements OnInit {
   fields$: Observable<Field[]>;
