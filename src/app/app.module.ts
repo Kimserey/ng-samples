@@ -17,8 +17,25 @@ import { PrimeNgComponent } from './primeng/prime-ng.component';
 import { QueryBuilderModule } from './query-builder/module';
 import { QueryBuilderComponent } from './query-builder/query-builder';
 import { MainQueryBuilderComponent } from './query-builder/main';
+import { GuardComponent } from 'app/guards-test/guard.component';
+import { GuardTest, Guard2Test } from 'app/guards-test/guard';
 
 const routes: Routes = [
+  {
+    path: ':something/guards',
+    canActivateChild: [
+      GuardTest
+    ],
+    children: [
+      {
+        path: ':id',
+        component: GuardComponent,
+        canActivate: [
+          Guard2Test
+        ]
+      }
+    ]
+  },
   {
     path: 'lazy-page',
     loadChildren: './one-page/one-page.module#OnePageModule'
@@ -56,11 +73,14 @@ const routes: Routes = [
   ],
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    GuardComponent
   ],
   providers: [
     Logger,
-    { provide: TEST, useValue: { Test: 'Hello world' } }
+    { provide: TEST, useValue: { Test: 'Hello world' } },
+    GuardTest,
+    Guard2Test
   ],
   bootstrap: [
     AppComponent

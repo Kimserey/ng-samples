@@ -1,26 +1,22 @@
-<div class="card card-outline-secondary">
-  <div class="card-block">
-    <div *ngIf="!edit">
-      <span>{{model?.field?.label}} {{model?.operation}}</span> <strong class="text-primary">{{model?.value}}</strong>
-      <button class="btn btn-link p-0 float-right" (click)="modify()" *ngIf="!edit">modify</button>
-    </div>
-
-    <form novalidate (ngSubmit)="submit()" *ngIf="edit">
-      <div class="form-group">
-        <label><strong>Property</strong></label>
-        <app-property-select [fields]="fields" [initialValue]="model.field?.label" (selection)="model.field = $event"></app-property-select>
-      </div>
-      <div class="form-group" *ngIf="model.field">
-        <label><strong>Operation</strong></label>
-        <app-operation-select [fieldType]="model.field?.type" [initialValue]="model.operation" (selection)="model.operation = $event"></app-operation-select>
-      </div>
-      <div class="form-group" *ngIf="model.field && model.operation">
-        <label><strong>Value</strong></label>
-        <app-value-select [fieldType]="model.field?.type" [initialValue]="model.value" (selection)="model.value = $event"></app-value-select>
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!model.field || !model.operation || !model.value">Save</button>
-      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
-      <button type="button" class="btn btn-danger float-right" (click)="deleteRule()" *ngIf="!newModel">Delete</button>
-    </form>
-  </div>
+<div *ngIf="!edit">
+  <span>{{model?.field?.label}} {{model?.operation}}</span> <strong class="text-primary">{{model?.value}}</strong>
+  <button class="btn btn-link p-0 float-right" (click)="modify()" *ngIf="!edit">modify</button>
 </div>
+
+<form novalidate (ngSubmit)="submit()" *ngIf="edit">
+  <div class="form-group">
+    <label><strong>Property</strong></label>
+    <app-property-select [fields]="fields" [initialValue]="model.field?.label" (selection)="model.field = $event"></app-property-select>
+  </div>
+  <div class="form-group" *ngIf="model.field">
+    <label><strong>Operation</strong></label>
+    <app-operation-select [fieldType]="model.field?.type" [initialValue]="model.operation" (selection)="model.operation = $event"></app-operation-select>
+  </div>
+  <div class="form-group" *ngIf="model.field && model.operation">
+    <label><strong>Value</strong></label>
+    <app-value-select [fieldType]="model.field?.type" [initialValue]="model.value" (selection)="model.value = $event"></app-value-select>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!model.field || !model.operation || !model.value">Save</button>
+  <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  <button type="button" class="btn btn-danger float-right" (click)="deleteRule()" *ngIf="!newModel">Delete</button>
+</form>
