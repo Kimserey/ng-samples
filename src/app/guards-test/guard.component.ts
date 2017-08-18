@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   template: `
@@ -15,14 +16,21 @@ export class GuardComponent implements OnInit {
   id$: Observable<string>;
   something$: Observable<string>;
 
+  somethingSub: Subscription;
+  idSub: Subscription;
+
   constructor(private router: Router, private route: ActivatedRoute) {
     alert('constructor component');
   }
 
   ngOnInit() {
     alert('init component');
+
     this.something$ = this.route.params.pluck('something');
+    this.somethingSub = this.something$.subscribe(x => console.log('new something: ' + x));
+
     this.id$ = this.route.params.pluck('id');
+    this.idSub = this.id$.subscribe(x => console.log('new id: ' + x));
   }
 
   go(id) {
