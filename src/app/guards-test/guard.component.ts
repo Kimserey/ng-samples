@@ -15,9 +15,12 @@ export class GuardComponent implements OnInit {
   id$: Observable<string>;
   something$: Observable<string>;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) {
+    alert('constructor component');
+  }
 
   ngOnInit() {
+    alert('init component');
     this.something$ = this.route.params.pluck('something');
     this.id$ = this.route.params.pluck('id');
   }
