@@ -17,10 +17,15 @@ import { PrimeNgComponent } from './primeng/prime-ng.component';
 import { QueryBuilderModule } from './query-builder/module';
 import { QueryBuilderComponent } from './query-builder/query-builder';
 import { MainQueryBuilderComponent } from './query-builder/main';
-import { GuardComponent } from 'app/guards-test/guard.component';
-import { GuardTest, Guard2Test } from 'app/guards-test/guard';
+import { GuardComponent } from './guards-test/guard.component';
+import { GuardTest, Guard2Test } from './guards-test/guard';
+import { QueryBuilderModelingComponent } from './query-builder-model/query-builder.component';
 
 const routes: Routes = [
+  {
+    path: 'modeling',
+    component: QueryBuilderModelingComponent
+  },
   {
     path: ':something/guards',
     canActivateChild: [
@@ -74,7 +79,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    GuardComponent
+    GuardComponent,
+    QueryBuilderModelingComponent
   ],
   providers: [
     Logger,

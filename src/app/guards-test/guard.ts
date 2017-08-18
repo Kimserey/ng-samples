@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, Router } from '@angular/router';
 import { of } from 'rxjs/observable/of';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class GuardTest implements CanActivate, CanActivateChild {
@@ -9,7 +9,7 @@ export class GuardTest implements CanActivate, CanActivateChild {
   constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    alert(route.params['something']);
+    alert('canActivate ' + route.params['something']);
     return of(true);
   }
 
@@ -17,6 +17,8 @@ export class GuardTest implements CanActivate, CanActivateChild {
     // if observable never ends, the redirection never occurs
     // this.router.navigate(['/']);
     // return Observable.never();
+
+    alert('canActivate child ' + childRoute.params['something']);
     return this.canActivate(childRoute, state);
   }
 }
