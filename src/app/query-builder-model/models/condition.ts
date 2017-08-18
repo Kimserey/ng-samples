@@ -1,11 +1,8 @@
-export interface Rule {
-  field: string;
-  operator: string;
-  value: string;
-}
+import { Query } from './query';
 
 export interface Condition {
   condition: string;
+  queries: Query[];
 }
 
 export class And implements Condition {
@@ -19,8 +16,3 @@ export class Or implements Condition {
 
   constructor(public queries: Query[]) { }
 }
-
-export type Query =
-  | And
-  | Or
-  | Rule;

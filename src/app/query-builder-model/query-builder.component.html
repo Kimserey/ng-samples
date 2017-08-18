@@ -1,0 +1,23 @@
+<div *ngIf="model.condition === 'AND' || model.condition === 'OR'">
+  <div class="row">
+    <div class="col">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" [ngClass]="{'active': model.condition === 'AND'}">AND</button>
+        <button type="button" class="btn btn-primary" [ngClass]="{'active': model.condition === 'OR'}">OR</button>
+      </div>
+    </div>
+    <div class="col text-right">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-success">Add rule</button>
+        <button type="button" class="btn btn-success">Add group</button>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let query of model.queries" class="mr-2 card m-3">
+    <div class="card-body">
+      <app-query [model]="query"></app-query>
+    </div>
+  </div>
+</div>
+
+<app-rule [model]="model" *ngIf="!model.condition"></app-rule>

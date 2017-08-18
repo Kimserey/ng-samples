@@ -2,12 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { Query, Or, And, Rule } from './models';
+import { Query, Condition, Rule } from './models';
 
 @Component({
-  templateUrl: 'query-builder.component.html',
-  selector: 'app-query'
+  template: `
+    <pre>{{condition|json}}</pre>
+  `
 })
-export class QueryBuilderModelingComponent {
-  @Input() model: Query;
+export class ConditionComponent {
+  @Input() condition: Condition;
 }

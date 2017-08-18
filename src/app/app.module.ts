@@ -19,12 +19,13 @@ import { QueryBuilderComponent } from './query-builder/query-builder';
 import { MainQueryBuilderComponent } from './query-builder/main';
 import { GuardComponent } from './guards-test/guard.component';
 import { GuardTest, Guard2Test } from './guards-test/guard';
-import { QueryBuilderModelingComponent } from './query-builder-model/query-builder.component';
+import { QueryBuilderModelingModule } from './query-builder-model/query-builder.module';
+import { MainModelingComponent } from './query-builder-model/main.component';
 
 const routes: Routes = [
   {
     path: 'modeling',
-    component: QueryBuilderModelingComponent
+    component: MainModelingComponent
   },
   {
     path: ':something/guards',
@@ -74,13 +75,13 @@ const routes: Routes = [
     RxTestModule,
     HttpModule,
     PrimeNgModule,
-    QueryBuilderModule
+    QueryBuilderModule,
+    QueryBuilderModelingModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
-    GuardComponent,
-    QueryBuilderModelingComponent
+    GuardComponent
   ],
   providers: [
     Logger,
