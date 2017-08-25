@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 
 import { AppConfig } from './square.model';
 import { SquareService } from './square.service';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-square',
@@ -9,6 +11,9 @@ import { SquareService } from './square.service';
     <div class="square" *ngIf="show" (click)="onPressed()"></div>
     <div appHighlight>Surface: {{surface}}</div>
     <div>{{config.api}}</div>
+
+    <div>{{service.test$ | async}}</div>
+    <button (click)="add()">add</button>
   `,
   styles: [
     `.square {
@@ -56,5 +61,10 @@ export class SquareComponent implements OnChanges, OnInit {
 
   private computeSurface() {
     this.surface = this.service.computeSurface(this.side);
+  }
+
+
+  add() {
+    this.service.setTest('SET');
   }
 }

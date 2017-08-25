@@ -1,7 +1,6 @@
-import { And, Or } from './condition';
+import { Group } from './group';
 import { Rule } from './rule';
 
 export type Query =
-| And
-| Or
+| Group
 | Rule;

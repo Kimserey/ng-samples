@@ -13,7 +13,6 @@ import { OnePageModule } from './one-page/one-page.module';
 import { HomeComponent } from './home.component';
 import { SecondPageComponent } from './one-page/sub-page.component';
 import { PrimeNgModule } from './primeng/prime-ng.module';
-import { PrimeNgComponent } from './primeng/prime-ng.component';
 import { QueryBuilderModule } from './query-builder/module';
 import { QueryBuilderComponent } from './query-builder/query-builder';
 import { MainQueryBuilderComponent } from './query-builder/main';
@@ -21,8 +20,12 @@ import { GuardComponent } from './guards-test/guard.component';
 import { GuardTest, Guard2Test } from './guards-test/guard';
 import { QueryBuilderModelingModule } from './query-builder-model/query-builder.module';
 import { MainModelingComponent } from './query-builder-model/main.component';
+import { SquareComponent } from './square/square.component';
 
 const routes: Routes = [
+  { path: 'square',
+    component: SquareComponent
+  },
   {
     path: 'modeling',
     component: MainModelingComponent
@@ -49,10 +52,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
-  },
-  {
-    path: 'prime-ng',
-    component: PrimeNgComponent,
   },
   {
     path: '',

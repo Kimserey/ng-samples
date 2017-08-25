@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { TreeNode } from 'primeng/primeng';
+import { TreeNode, MenuItem } from 'primeng/primeng';
+import { BreadcrumbService } from './services/breadcrumb';
 
 @Component({
-  template: '<p-tree [value]="files"></p-tree>'
+  template: `
+    <p-tree [value]="files"></p-tree>
+  `
 })
-export class PrimeNgComponent implements OnInit {
+export class FileTreeComponent implements OnInit {
   files: TreeNode[];
+
+  constructor(private breadcrumb: BreadcrumbService) {}
 
   reducePath = (nodes: TreeNode[], path: string) => {
     const split = path.split('/');

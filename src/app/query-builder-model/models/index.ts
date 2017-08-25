@@ -1,3 +1,3 @@
-export { And, Condition, Or } from './condition';
+export { Group } from './group';
 export { Query } from './query';
 export { Rule } from './rule';

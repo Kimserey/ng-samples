@@ -2,22 +2,23 @@
   <div class="row">
     <div class="col">
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary" [ngClass]="{'active': model.condition === 'AND'}">AND</button>
-        <button type="button" class="btn btn-primary" [ngClass]="{'active': model.condition === 'OR'}">OR</button>
+        <button type="button" class="btn btn-primary" [ngClass]="{'active': model.condition === 'AND'}" (click)="toggleCondition('AND')">AND</button>
+        <button type="button" class="btn btn-primary" [ngClass]="{'active': model.condition === 'OR'}" (click)="toggleCondition('OR')">OR</button>
       </div>
     </div>
     <div class="col text-right">
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-success">Add rule</button>
-        <button type="button" class="btn btn-success">Add group</button>
+        <button type="button" class="btn btn-success" (click)="addRule()">Add rule</button>
+        <button type="button" class="btn btn-success" (click)="addGroup()">Add group</button>
+        <button type="button" class="btn btn-danger" (click)="delete.emit()" *ngIf="!isParent">Delete group</button>
       </div>
     </div>
   </div>
-  <div *ngFor="let query of model.queries" class="mr-2 card m-3">
+  <div *ngFor="let query of model.queries;index as i" class="mr-2 card m-3">
     <div class="card-body">
-      <app-query [model]="query"></app-query>
+      <app-query [model]="query" (delete)="deleteQuery(i)" [isParent]="false"></app-query>
     </div>
   </div>
 </div>
 
-<app-rule [model]="model" *ngIf="!model.condition"></app-rule>
+<app-rule [model]="model" (delete)="deleteRule()" *ngIf="!model.condition"></app-rule>

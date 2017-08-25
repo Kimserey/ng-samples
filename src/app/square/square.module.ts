@@ -20,10 +20,10 @@ import { Logger } from '../logger.service';
     SquareComponent
   ],
   providers: [
-    // SquareService,
+    SquareService,
     // DoubleSquareService,
     // { provide: SquareService, useClass: DoubleSquareService },
-    { provide: SquareService, useFactory: squareServiceFactory, deps: [Logger] },
+    // { provide: SquareService, useFactory: squareServiceFactory, deps: [Logger] },
     { provide: AppConfig, useClass: AppConfig  } // Same as AppConfig
   ]
 })
