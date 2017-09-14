@@ -18,6 +18,6 @@ export class MyBreadcrumbedComponent implements OnInit {
         label: 'B'
       }, {
         label: 'C'
-      }])
+      }]);
     }
 }

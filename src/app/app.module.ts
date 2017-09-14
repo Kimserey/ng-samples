@@ -21,6 +21,7 @@ import { GuardTest, Guard2Test } from './guards-test/guard';
 import { QueryBuilderModelingModule } from './query-builder-model/query-builder.module';
 import { MainModelingComponent } from './query-builder-model/main.component';
 import { SquareComponent } from './square/square.component';
+import { AuthTestComponent } from './auth/auth-test';
 
 const routes: Routes = [
   { path: 'square',
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'modeling',
     component: MainModelingComponent
+  },
+  {
+    path: 'auth',
+    component: AuthTestComponent
   },
   {
     path: ':something/guards',
@@ -80,7 +85,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    GuardComponent
+    GuardComponent,
+    AuthTestComponent
   ],
   providers: [
     Logger,

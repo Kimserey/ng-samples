@@ -9,7 +9,18 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        {
+          "glob": "*.js",
+          "input": "./my-lib",
+          "output": "./my-lib"
+        },
+        "callback.html",
+        {
+          "glob": "**/*.js",
+          "input": "../node_modules/oidc-client/dist/",
+          "output": "./"
+        }
       ],
       "index": "index.html",
       "main": "main.ts",
