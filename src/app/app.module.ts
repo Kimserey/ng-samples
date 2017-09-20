@@ -4,6 +4,7 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { ComplexComponent } from './reactive-form-playground/complex-form';
 import { Logger } from './logger.service';
 import { ReactiveFormPlaygroundModule } from './reactive-form-playground/reactive-form-playground.module';
 import { SquareModule } from './square/square.module';
@@ -24,6 +25,10 @@ import { SquareComponent } from './square/square.component';
 import { AuthTestComponent } from './auth/auth-test';
 
 const routes: Routes = [
+  {
+    path: 'complex-form',
+    component: ComplexComponent
+  },
   { path: 'square',
     component: SquareComponent
   },
