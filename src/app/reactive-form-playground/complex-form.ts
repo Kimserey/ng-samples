@@ -8,7 +8,7 @@ interface Model {
   validity: Date;
   range: number[];
   sections: {
-    name: string;
+    sectionName: string;
     keywords: string[];
   }[];
 }
@@ -47,6 +47,14 @@ interface Model {
             <p-dropdown [options]="choices" formControlName="choice"></p-dropdown>
           </div>
         </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Sections</label>
+          <div class="col-sm-9" formArrayName="sections">
+            <div *ngFor="let section of sections.controls; index as i" [formGroupName]="i">
+              <input id="{{ 'sectionName-' + i }}" type="text" class="form-control" formControlName="sectionName" placeholder="Enter section name" />
+            </div>
+          </div>
+        </div>
       </form>
     </div>
     <pre>{{form.value|json}}</pre>
@@ -55,6 +63,10 @@ interface Model {
 export class ComplexComponent implements OnInit {
   form: FormGroup;
   choices: {label: string, value: string}[];
+
+  get sections() {
+    return this.form.get('sections');
+  }
 
   constructor(private fb: FormBuilder) {
   }
@@ -72,7 +84,12 @@ export class ComplexComponent implements OnInit {
       color: [''],
       validity: [new Date()],
       range: [[0, 100]],
-      choice: [this.choices[0].value]
+      choice: [this.choices[0].value],
+      sections: this.fb.array([
+        this.fb.group({
+          sectionName: ['']
+        }
+      )])
     });
   }
 }
