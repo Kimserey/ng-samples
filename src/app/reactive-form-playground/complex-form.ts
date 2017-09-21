@@ -15,66 +15,69 @@ interface Model {
 
 @Component({
   template: `
-    <div class="p-3">
-      <form [formGroup]="form">
-        <div class="form-group row">
-          <label for="name" class="col-sm-3 col-form-label">Name</label>
-          <div class="col-sm-9">
-            <input id="name" type="text" class="form-control" formControlName="name" placeholder="Enter name" />
+    <div class="m-3 card">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="save()">
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input id="name" type="text" class="form-control" formControlName="name" placeholder="Enter name" />
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label for="color" class="col-sm-3 col-form-label">Color</label>
-          <div class="col-sm-9">
-            <p-colorPicker formControlName="color"></p-colorPicker>
+          <div class="form-group row">
+            <label for="color" class="col-sm-3 col-form-label">Color</label>
+            <div class="col-sm-9">
+              <p-colorPicker formControlName="color"></p-colorPicker>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label for="date" class="col-sm-3 col-form-label">Date</label>
-          <div class="col-sm-9">
-            <p-calendar formControlName="validity" dateFormat="D d, M yy"></p-calendar>
+          <div class="form-group row">
+            <label for="date" class="col-sm-3 col-form-label">Date</label>
+            <div class="col-sm-9">
+              <p-calendar formControlName="validity" dateFormat="D d, M yy"></p-calendar>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label for="range" class="col-sm-3 col-form-label">Range</label>
-          <div class="col-sm-9">
-            <p-slider formControlName="range" [range]="true" [min]="0" [max]="1000"></p-slider>
+          <div class="form-group row">
+            <label for="range" class="col-sm-3 col-form-label">Range</label>
+            <div class="col-sm-9">
+              <p-slider formControlName="range" [range]="true" [min]="0" [max]="1000"></p-slider>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label for="choice" class="col-sm-3 col-form-label">Choice</label>
-          <div class="col-sm-9">
-            <p-dropdown [options]="choices" formControlName="choice"></p-dropdown>
+          <div class="form-group row">
+            <label for="choice" class="col-sm-3 col-form-label">Choice</label>
+            <div class="col-sm-9">
+              <p-dropdown [options]="choices" formControlName="choice"></p-dropdown>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Sections</label>
-          <div class="col-sm-9" formArrayName="sections">
-            <div class="row mb-2" *ngFor="let section of sections.controls; index as i;" [formGroupName]="i">
-              <div class="col-sm-9">
-                <input id="{{ 'sectionName-' + i }}" type="text" class="form-control" formControlName="sectionName" placeholder="Enter section name" />
-              </div>
-              <div class="col-sm-3">
-                <button class="btn btn-danger" (click)="removeSection(i)">Remove this section</button>
-              </div>
-              <div class="col-12 p-3" formArrayName="keywords">
-                <div class="m-2">
-                  <div class="row mb-2" *ngFor="let keyword of getKeywords(i).controls; index as j" [formGroupName]="j">
-                    <div class="col-sm-9">
-                      <input id="{{ 'keyword-' + i + '-' + j }}" type="text" class="form-control" formControlName="keyword" placeholder="Enter section name" />
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Sections</label>
+            <div class="col-sm-9" formArrayName="sections">
+              <div class="row mb-2" *ngFor="let section of sections.controls; index as i;" [formGroupName]="i">
+                <div class="col-sm-9">
+                  <input id="{{ 'sectionName-' + i }}" type="text" class="form-control" formControlName="sectionName" placeholder="Enter section name" />
+                </div>
+                <div class="col-sm-3">
+                  <button class="btn btn-danger" (click)="removeSection(i)">Remove this section</button>
+                </div>
+                <div class="col-12 p-3" formArrayName="keywords">
+                  <div class="m-2">
+                    <div class="row mb-2" *ngFor="let keyword of getKeywords(i).controls; index as j" [formGroupName]="j">
+                      <div class="col-sm-9">
+                        <input id="{{ 'keyword-' + i + '-' + j }}" type="text" class="form-control" formControlName="keyword" placeholder="Enter section name" />
+                      </div>
+                      <div class="col-sm-3">
+                        <button class="btn btn-danger" (click)="removeSectionKeyword(i, j)">Remove this keyword</button>
+                      </div>
                     </div>
-                    <div class="col-sm-3">
-                      <button class="btn btn-danger" (click)="removeSectionKeyword(i, j)">Remove this keyword</button>
-                    </div>
+                    <button class="btn btn-primary" (click)="addSectionKeyword(i)">Add a keyword</button>
                   </div>
-                  <button class="btn btn-primary" (click)="addSectionKeyword(i)">Add a keyword</button>
                 </div>
               </div>
+              <button class="btn btn-primary" (click)="addSection()">Add a section</button>
             </div>
-            <button class="btn btn-primary" (click)="addSection()">Add a section</button>
           </div>
-        </div>
-      </form>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
     </div>
     <pre>{{form.value|json}}</pre>
   `
@@ -137,5 +140,9 @@ export class ComplexComponent implements OnInit {
 
   removeSectionKeyword(sectionIndex, keywordIndex) {
     this.getKeywords(sectionIndex).removeAt(keywordIndex);
+  }
+
+  save() {
+    console.log(this.form.value);
   }
 }
