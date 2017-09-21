@@ -9,7 +9,7 @@ interface Model {
   range: number[];
   sections: {
     sectionName: string;
-    keywords: string[];
+    keywords: { keyword: string };
   }[];
 }
 
@@ -50,9 +50,28 @@ interface Model {
         <div class="form-group row">
           <label class="col-sm-3 col-form-label">Sections</label>
           <div class="col-sm-9" formArrayName="sections">
-            <div *ngFor="let section of sections.controls; index as i" [formGroupName]="i">
-              <input id="{{ 'sectionName-' + i }}" type="text" class="form-control" formControlName="sectionName" placeholder="Enter section name" />
+            <div class="row mb-2" *ngFor="let section of sections.controls; index as i;" [formGroupName]="i">
+              <div class="col-sm-9">
+                <input id="{{ 'sectionName-' + i }}" type="text" class="form-control" formControlName="sectionName" placeholder="Enter section name" />
+              </div>
+              <div class="col-sm-3">
+                <button class="btn btn-danger" (click)="removeSection(i)">Remove this section</button>
+              </div>
+              <div class="col-12 p-3" formArrayName="keywords">
+                <div class="m-2">
+                  <div class="row mb-2" *ngFor="let keyword of getKeywords(i).controls; index as j" [formGroupName]="j">
+                    <div class="col-sm-9">
+                      <input id="{{ 'keyword-' + i + '-' + j }}" type="text" class="form-control" formControlName="keyword" placeholder="Enter section name" />
+                    </div>
+                    <div class="col-sm-3">
+                      <button class="btn btn-danger" (click)="removeSectionKeyword(i, j)">Remove this keyword</button>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" (click)="addSectionKeyword(i)">Add a keyword</button>
+                </div>
+              </div>
             </div>
+            <button class="btn btn-primary" (click)="addSection()">Add a section</button>
           </div>
         </div>
       </form>
@@ -65,11 +84,14 @@ export class ComplexComponent implements OnInit {
   choices: {label: string, value: string}[];
 
   get sections() {
-    return this.form.get('sections');
+    return this.form.get('sections') as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {
+  getKeywords(sectionIndex) {
+    return this.sections.controls[sectionIndex].get('keywords') as FormArray;
   }
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.choices = [
@@ -87,12 +109,33 @@ export class ComplexComponent implements OnInit {
       choice: [this.choices[0].value],
       sections: this.fb.array([
         this.fb.group({
-          sectionName: ['']
-        }),
-        this.fb.group({
-          sectionName: ['']
+          sectionName: [''],
+          keywords: this.fb.array([])
         })
       ])
     });
+  }
+
+  addSection() {
+    this.sections.push(this.fb.group({
+        sectionName: [''],
+        keywords: this.fb.array([])
+      })
+    );
+  }
+
+  removeSection(i) {
+    this.sections.removeAt(i);
+  }
+
+  addSectionKeyword(sectionIndex) {
+    this.getKeywords(sectionIndex).push(this.fb.group({
+        keyword: ['']
+      })
+    );
+  }
+
+  removeSectionKeyword(sectionIndex, keywordIndex) {
+    this.getKeywords(sectionIndex).removeAt(keywordIndex);
   }
 }
