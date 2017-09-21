@@ -88,8 +88,11 @@ export class ComplexComponent implements OnInit {
       sections: this.fb.array([
         this.fb.group({
           sectionName: ['']
-        }
-      )])
+        }),
+        this.fb.group({
+          sectionName: ['']
+        })
+      ])
     });
   }
 }
