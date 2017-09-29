@@ -1,15 +1,15 @@
 import { Observable } from 'rxjs/Observable';
 import { MenuItem } from 'primeng/primeng';
-import { Subject } from 'rxjs/Rx';
+import { ReplaySubject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class BreadcrumbService {
-  private crumbs: Subject<MenuItem[]>;
+  private crumbs: ReplaySubject<MenuItem[]>;
   crumbs$: Observable<MenuItem[]>;
 
   constructor() {
-    this.crumbs = new Subject<MenuItem[]>();
+    this.crumbs = new ReplaySubject<MenuItem[]>();
     this.crumbs$ = this.crumbs.asObservable();
   }
 

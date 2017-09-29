@@ -10,6 +10,8 @@ import { ParentComponent } from './parent.component';
 import { FileTreeComponent } from './file-tree.component';
 import { BreadcrumbService } from './services/breadcrumb';
 import { MyBreadcrumbedComponent } from './my-breadcrumbed.component';
+import { MyBreadcrumbed2Component } from './my-breadcrumbed-2.component';
+import { BreadcrumbInitializedGuard } from './guards/breadcrumb.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +23,19 @@ const routes: Routes = [
     }, {
       path: 'breadcrumb',
       component: MyBreadcrumbedComponent
+    }, {
+      path: 'breadcrumb2',
+      component: MyBreadcrumbed2Component,
+      canActivate: [ BreadcrumbInitializedGuard ],
+      data: {
+        crumbs: [{
+          label: 'test1'
+        }, {
+          label: 'test2'
+        }, {
+          label: 'test3'
+        }]
+      }
     }],
   }
 ];
@@ -38,10 +53,12 @@ const routes: Routes = [
   declarations: [
     ParentComponent,
     FileTreeComponent,
-    MyBreadcrumbedComponent
+    MyBreadcrumbedComponent,
+    MyBreadcrumbed2Component
   ],
   providers: [
-    BreadcrumbService
+    BreadcrumbService,
+    BreadcrumbInitializedGuard
   ]
 })
 export class PrimeNgModule { }
