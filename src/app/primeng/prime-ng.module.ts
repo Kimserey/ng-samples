@@ -2,11 +2,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { BreadcrumbModule } from 'primeng/primeng';
-import { DataTableModule } from 'primeng/primeng';
-import { GrowlModule } from 'primeng/primeng';
-import { TreeModule } from 'primeng/primeng';
-import { TreeTableModule } from 'primeng/primeng';
+import {
+  BreadcrumbModule,
+  CalendarModule,
+  DropdownModule,
+  DataTableModule,
+  GrowlModule,
+  TreeModule,
+  TreeTableModule
+} from 'primeng/primeng';
 import { ParentComponent } from './parent.component';
 import { FileTreeComponent } from './file-tree.component';
 import { BreadcrumbService } from './services/breadcrumb';
@@ -17,12 +21,12 @@ import { BreadcrumbInitializedGuard } from './guards/breadcrumb.guard';
 
 const routes: Routes = [
   {
+    path: 'data-table',
+    component: DataTableComponent,
+  }, {
     path: 'prime',
     component: ParentComponent,
     children: [{
-      path: 'data-table',
-      component: DataTableComponent,
-    }, {
       path: 'file-tree',
       component: FileTreeComponent,
     }, {
@@ -31,7 +35,7 @@ const routes: Routes = [
     }, {
       path: 'breadcrumb2',
       component: MyBreadcrumbed2Component,
-      canActivate: [ BreadcrumbInitializedGuard ],
+      canActivate: [BreadcrumbInitializedGuard],
       data: {
         crumbs: [{
           label: 'test1'
@@ -50,17 +54,20 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     BreadcrumbModule,
     CommonModule,
+    DropdownModule,
     DataTableModule,
     FormsModule,
     GrowlModule,
     TreeTableModule,
     TreeModule,
+    CalendarModule
   ],
   declarations: [
     ParentComponent,
     FileTreeComponent,
     MyBreadcrumbedComponent,
-    MyBreadcrumbed2Component
+    MyBreadcrumbed2Component,
+    DataTableComponent
   ],
   providers: [
     BreadcrumbService,
