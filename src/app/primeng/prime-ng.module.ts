@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BreadcrumbModule } from 'primeng/primeng';
+import { DataTableModule } from 'primeng/primeng';
 import { GrowlModule } from 'primeng/primeng';
 import { TreeModule } from 'primeng/primeng';
 import { TreeTableModule } from 'primeng/primeng';
@@ -11,6 +12,7 @@ import { FileTreeComponent } from './file-tree.component';
 import { BreadcrumbService } from './services/breadcrumb';
 import { MyBreadcrumbedComponent } from './my-breadcrumbed.component';
 import { MyBreadcrumbed2Component } from './my-breadcrumbed-2.component';
+import { DataTableComponent } from './data-table.component';
 import { BreadcrumbInitializedGuard } from './guards/breadcrumb.guard';
 
 const routes: Routes = [
@@ -18,6 +20,9 @@ const routes: Routes = [
     path: 'prime',
     component: ParentComponent,
     children: [{
+      path: 'data-table',
+      component: DataTableComponent,
+    }, {
       path: 'file-tree',
       component: FileTreeComponent,
     }, {
@@ -45,6 +50,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     BreadcrumbModule,
     CommonModule,
+    DataTableModule,
     FormsModule,
     GrowlModule,
     TreeTableModule,
